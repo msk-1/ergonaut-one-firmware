@@ -1,9 +1,16 @@
+# Ergonaut One 依存モジュール設定
+# - zmk: ZMKファームウェア本体
+# - ergonautkb-zmk-module: Ergonaut Oneボード定義
+# - zmk-layout-shift: レイアウトシフト機能
+
 manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
     - name: ergonautkb
       url-base: https://github.com/ergonautkb
+    - name: kot149
+      url-base: https://github.com/kot149
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -12,5 +19,8 @@ manifest:
     - name: ergonautkb-zmk-module
       remote: ergonautkb
       revision: main
+    - name: zmk-layout-shift
+      remote: kot149
+      revision: v1
   self:
     path: config
