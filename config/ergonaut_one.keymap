@@ -22,37 +22,32 @@
 
         shift_tab {
             bindings = <&kp LS(TAB)>;
-            key-positions = <13 14>;
+            key-positions = <14 15>;
         };
 
         tab {
             bindings = <&kp TAB>;
-            key-positions = <14 15>;
+            key-positions = <15 16>;
         };
 
         eq {
             bindings = <&kp EQUAL>;
-            key-positions = <20 21>;
+            key-positions = <20 19>;
         };
 
         tilde {
             bindings = <&kp GRAVE>;
-            key-positions = <6 7>;
-        };
-
-        bq {
-            bindings = <&kp BACKSLASH>;
-            key-positions = <36 37>;
+            key-positions = <7 8>;
         };
 
         layout_shift_on {
             bindings = <&tog_ls_on>;
-            key-positions = <10 22>;
+            key-positions = <11 23>;
         };
 
         layout_shift_off {
             bindings = <&tog_ls_off>;
-            key-positions = <22 34>;
+            key-positions = <23 35>;
         };
     };
 
