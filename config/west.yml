@@ -9,6 +9,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: ergonautkb
       url-base: https://github.com/ergonautkb
+    - name: msk-1
+      url-base: https://github.com/msk-1
     - name: kot149
       url-base: https://github.com/kot149
   projects:
@@ -17,7 +19,7 @@ manifest:
       revision: v0.3-branch
       import: app/west.yml
     - name: ergonautkb-zmk-module
-      remote: ergonautkb
+      remote: msk-1
       revision: main
     - name: zmk-layout-shift
       remote: kot149
