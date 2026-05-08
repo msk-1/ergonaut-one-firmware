@@ -8,7 +8,6 @@
  */
 
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 
 &mt {
@@ -365,26 +364,26 @@
             bindings = <
 &mt LEFT_COMMAND TAB  &kp Q  &kp W  &kp E            &kp R               &kp T      &kp Y          &kp U        &kp I      &kp O    &kp P        &kp SINGLE_QUOTE
 &kp LEFT_CONTROL      &kp A  &kp S  &kp D            &mt LEFT_CONTROL F  &kp G      &kp H          &kp J        &kp K      &kp L    &lt 1 MINUS  &kp SEMICOLON
-&kp LEFT_SHIFT        &kp Z  &kp X  &kp C            &kp V               &kp B      &kp N          &kp M        &kp COMMA  &kp DOT  &kp SLASH    &kp RIGHT_SHIFT
-                                    &alt_lt 6 LANG2  &lt 2 SPACE         &kp LANG1  &kp BACKSPACE  &lt 3 ENTER  &kp DEL
+&kp LEFT_SHIFT        &kp Z  &kp X  &kp C            &kp V               &kp B      &kp N          &kp M        &kp COMMA  &kp DOT  &kp SLASH    &mt ESCAPE RIGHT_SHIFT
+                                    &alt_lt 5 LANG2  &lt 2 SPACE         &kp LANG1  &kp BACKSPACE  &lt 3 ENTER  &kp DEL
             >;
         };
 
         ARROW {
             bindings = <
-&trans  &kp ESCAPE        &none   &none   &none   &none    &none           &none           &none         &none            &none  &none
-&trans  &kp LEFT_CONTROL  &kp F2  &kp F6  &kp F7  &kp F10  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &none  &none
-&trans  &kp LEFT_SHIFT    &none   &none   &none   &none    &none           &kp HOME        &kp END       &none            &none  &none
-                                  &trans  &trans  &trans   &kp DEL         &trans          &none
+&kp ESCAPE  &none  &none   &none   &none   &none    &none           &none           &none         &none            &none  &none
+&trans      &none  &kp F2  &kp F6  &kp F7  &kp F10  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &none  &none
+&trans      &none  &none   &none   &none   &none    &none           &kp HOME        &kp END       &none            &none  &none
+                           &trans  &trans  &trans   &trans          &trans          &trans
             >;
         };
 
         SYMBOL {
             bindings = <
-&trans  &kp ESC         &none  &none    &none    &none     &m_caret          &m_amps    &m_star    &kp EQUAL         &kp BACKSLASH      &none
-&trans  &m_excl         &m_at  &m_hash  &m_dllr  &m_prcnt  &kp SEMICOLON     &m_lpar    &m_rpar    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &none
-&trans  &kp LEFT_SHIFT  &none  &none    &none    &none     &kp SINGLE_QUOTE  &m_lbrace  &m_rbrace  &m_lt             &m_gt              &none
-                               &trans   &trans   &trans    &kp DEL           &trans     &none
+&kp ESCAPE  &none    &none  &none    &none    &none     &m_caret          &m_amps    &m_star    &kp EQUAL         &kp BACKSLASH      &none
+&trans      &m_excl  &m_at  &m_hash  &m_dllr  &m_prcnt  &kp SEMICOLON     &m_lpar    &m_rpar    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &none
+&trans      &none    &none  &none    &none    &none     &kp SINGLE_QUOTE  &m_lbrace  &m_rbrace  &m_lt             &m_gt              &none
+                            &trans   &trans   &trans    &kp DEL           &trans     &none
             >;
         };
 
@@ -403,15 +402,6 @@
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
                         &trans  &trans  &trans  &trans  &trans  &trans
-            >;
-        };
-
-        BLUETOOTH {
-            bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans        &trans        &trans        &trans        &bt BT_CLR      &trans
-                        &trans  &trans  &trans  &bootloader   &trans        &trans
             >;
         };
 
