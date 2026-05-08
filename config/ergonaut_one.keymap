@@ -40,11 +40,6 @@
             key-positions = <7 8>;
         };
 
-        bq {
-            bindings = <&kp BACKSLASH>;
-            key-positions = <36 37>;
-        };
-
         layout_shift_on {
             bindings = <&tog_ls_on>;
             key-positions = <11 23>;
