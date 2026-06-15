@@ -1,10 +1,11 @@
 /*
  * Ergonaut One キーマップ設定
- * - roBaキーマップからの移植版
- * - レイヤー定義
- * - コンボ
- * - マクロ
- * - レイアウトシフト
+ * - zmk-config-roBa からの移植版（トラックボール無し）
+ * - roBa の 5 列レイアウトを内側 5 列に配置
+ * - 一番外側の列: 左 = ESC / TAB / Win、右 = ` / ; / '
+ * - 最下段（サム）は roBa の外側 3 キー(LCTRL/LALT/LCMD)を除いた 3+3
+ * - レイヤー番号は MOUSE/SCROLL を削除して詰めている
+ *   0:default 1:ARROW_FN 2:SYMBOL 3:NUM_FN 4:BLUETOOTH 5:ALT_LAYER
  */
 
 #include <behaviors.dtsi>
@@ -21,11 +22,6 @@
     combos {
         compatible = "zmk,combos";
 
-        shift_tab {
-            bindings = <&kp LS(TAB)>;
-            key-positions = <14 15>;
-        };
-
         tab {
             bindings = <&kp TAB>;
             key-positions = <15 16>;
@@ -33,7 +29,7 @@
 
         eq {
             bindings = <&kp EQUAL>;
-            key-positions = <20 19>;
+            key-positions = <19 20>;
         };
 
         tilde {
@@ -41,14 +37,24 @@
             key-positions = <7 8>;
         };
 
+        bq {
+            bindings = <&kp BACKSLASH>;
+            key-positions = <31 32>;
+        };
+
         layout_shift_on {
             bindings = <&tog_ls_on>;
-            key-positions = <11 23>;
+            key-positions = <10 22>;
         };
 
         layout_shift_off {
             bindings = <&tog_ls_off>;
-            key-positions = <23 35>;
+            key-positions = <22 34>;
+        };
+
+        shift {
+            bindings = <&kp RIGHT_SHIFT>;
+            key-positions = <27 28>;
         };
     };
 
@@ -266,6 +272,34 @@
             bindings = <&macro_tap>, <&kp BACKSLASH &kp N>;
         };
 
+        m_c_pgup: m_c_pgup {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp PAGE_UP>,
+                <&macro_release>,
+                <&kp LCTRL>;
+        };
+
+        m_c_pgdn: m_c_pgdn {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings =
+                <&macro_press>,
+                <&kp LCTRL>,
+                <&macro_tap>,
+                <&kp PAGE_DOWN>,
+                <&macro_release>,
+                <&kp LCTRL>;
+        };
+
         // Layer-mod: holds LALT + activates specified layer
 
         lm: lm {
@@ -351,62 +385,57 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            // Ergonaut One: 12 keys per row (6 left + 6 right), 6 thumb keys
-            // Row 0: [outer] Q W E R T | Y U I O P [outer]
-            // Row 1: [outer] A S D F G | H J K L - [outer]
-            // Row 2: [outer] Z X C V B | N M , . / [outer]
-            // Thumb: LANG2 SPACE LANG1 | BS ENTER ESC
-
+            // 一番外側の列: 左 = ESC / TAB / Win、右 = ` / ; / '
             bindings = <
-&mt LEFT_COMMAND TAB  &kp Q  &kp W  &kp E            &kp R               &kp T        &kp Y            &kp U        &kp I      &kp O    &kp P        &kp SINGLE_QUOTE
-&kp LEFT_CONTROL      &kp A  &kp S  &kp D            &mt LEFT_CONTROL F  &kp G        &kp H            &kp J        &kp K      &kp L    &lt 1 MINUS  &kp SEMICOLON
-&kp LEFT_SHIFT        &kp Z  &kp X  &kp C            &kp V               &kp B        &kp N            &kp M        &kp COMMA  &kp DOT  &kp SLASH    &mt RIGHT_SHIFT ESC
-                                    &alt_lt 4 LANG2  &lt 2 SPACE         &lt 5 LANG1  &lt 5 BACKSPACE  &lt 3 ENTER  &kp DEL
+&kp ESC       &kp Q             &kp W         &kp E   &kp R               &kp T            &kp Y      &kp U  &kp I      &kp O    &kp P                 &kp GRAVE
+&kp TAB       &mt LCTRL A       &kp S         &kp D   &mt LEFT_CONTROL F  &kp G            &kp H      &kp J  &kp K      &kp L    &lt 1 MINUS           &kp SEMICOLON
+&kp LEFT_GUI  &mt LEFT_SHIFT Z  &kp X         &kp C   &kp V               &kp B            &kp N      &kp M  &kp COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH  &kp SINGLE_QUOTE
+                                              &alt_lt 5 LANG2  &lt 2 SPACE  &mt LEFT_WIN LANG1      &kp BACKSPACE  &lt 3 ENTER  &lt 4 ESC
             >;
         };
 
-        ARROW {
+        ARROW_FN {
             bindings = <
-&kp ESCAPE  &none  &none   &none   &none   &none    &none           &none           &none         &none            &none  &none
-&trans      &none  &kp F2  &kp F6  &kp F7  &kp F10  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &none  &none
-&trans      &none  &none   &none   &none   &none    &none           &kp HOME        &kp END       &none            &none  &none
-                           &trans  &trans  &trans   &trans          &trans          &trans
+&trans  &kp F1            &kp F2              &kp F3     &kp F4     &kp F5            &kp F6            &kp F7          &kp F8        &kp F9           &none  &trans
+&trans  &kp LEFT_CONTROL  &kp LC(LEFT_SHIFT)  &kp F10    &kp F11    &kp F12           &kp LEFT_ARROW    &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &none  &trans
+&trans  &kp LEFT_SHIFT    &kp LEFT_GUI        &m_c_pgup  &m_c_pgdn  &kp LG(UP_ARROW)  &kp RG(UP_ARROW)  &kp HOME        &kp END       &none            &none  &trans
+                                                         &trans     &trans            &trans            &trans          &trans        &none
             >;
         };
 
         SYMBOL {
             bindings = <
-&kp ESCAPE  &none    &none  &none    &none    &none     &m_caret          &m_amps    &m_star    &kp EQUAL         &kp BACKSLASH      &none
-&trans      &m_excl  &m_at  &m_hash  &m_dllr  &m_prcnt  &kp SEMICOLON     &m_lpar    &m_rpar    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &none
-&trans      &none    &none  &none    &none    &none     &kp SINGLE_QUOTE  &m_lbrace  &m_rbrace  &m_lt             &m_gt              &none
-                            &trans   &trans   &trans    &kp DEL           &trans     &none
+&trans  &kp ESC         &none    &none    &none    &none      &m_caret          &m_amps    &m_star    &kp EQUAL         &kp BACKSLASH      &trans
+&trans  &m_excl         &m_at    &m_hash  &m_dllr  &m_prcnt   &kp SEMICOLON     &m_lpar    &m_rpar    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans
+&trans  &kp LEFT_SHIFT  &none    &none    &none    &none      &kp SINGLE_QUOTE  &m_lbrace  &m_rbrace  &m_lt             &m_gt              &trans
+                                          &trans   &trans     &trans            &kp DEL    &trans     &none
             >;
         };
 
-        NUM {
+        NUM_FN {
             bindings = <
-&kp ESC  &none   &none   &none   &none   &none   &kp EQUAL  &kp PLUS  &kp MINUS  &kp ASTERISK  &kp SLASH  &none
-&trans   &kp N1  &kp N2  &kp N3  &kp N4  &kp N5  &kp N6     &kp N7    &kp N8     &kp N9        &kp N0     &none
-&trans   &none   &none   &none   &none   &none   &none      &none     &none      &kp PERIOD    &kp SLASH  &none
-                         &trans  &trans  &trans  &kp BSPC   &none     &trans
-            >;
-        };
-
-        ALT_LAYER {
-            bindings = <
-&kp ESC  &trans       &trans   &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans   &kp LS(TAB)  &kp TAB  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans   &trans       &trans   &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                               &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans            &trans            &trans            &trans            &trans          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp N1            &kp N2            &kp N3            &kp N4            &kp N5          &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans
+&trans  &kp LC(NUMBER_1)  &kp LC(NUMBER_2)  &kp LC(NUMBER_3)  &kp LC(NUMBER_4)  &kp LS(ESCAPE)  &trans  &trans  &trans  &trans  &trans  &trans
+                                            &trans            &trans            &trans          &kp BACKSPACE  &trans  &trans
             >;
         };
 
         BLUETOOTH {
             bindings = <
-&trans          &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &trans       &trans       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &trans
-&bt BT_CLR_ALL  &trans        &trans        &trans        &trans        &trans       &trans       &trans        &trans        &trans        &trans        &bt BT_CLR_ALL
-&bt BT_CLR      &trans        &trans        &trans        &trans        &bootloader  &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR
-                                            &trans        &trans        &trans       &trans       &trans        &trans
+&trans        &trans  &trans  &trans  &trans  &trans       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans
+&trans        &trans  &trans  &trans  &trans  &trans       &trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &trans
+&bootloader   &trans  &trans  &trans  &trans  &trans       &trans        &trans        &trans        &trans        &bt BT_CLR      &trans
+                                      &trans  &trans  &trans      &trans  &trans  &trans
+            >;
+        };
+
+        ALT_LAYER {
+            bindings = <
+&trans  &kp ESC      &trans   &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp LS(TAB)  &kp TAB  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans       &trans   &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+                              &trans  &trans  &trans      &kp SPACE  &trans  &trans
             >;
         };
     };
