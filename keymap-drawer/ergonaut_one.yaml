@@ -13,7 +13,7 @@ layers:
   - O
   - P
   - Caps Word
-  - ↹
+  - LEFT CONTROL
   - {t: A, h: Ctrl}
   - S
   - D
@@ -25,7 +25,7 @@ layers:
   - L
   - {t: '-', h: ARROW_FN}
   - ;
-  - LEFT GUI
+  - LEFT SHIFT
   - {t: Z, h: LEFT SHIFT}
   - X
   - C
@@ -273,3 +273,5 @@ combos:
   k: '&tog_ls_off'
 - p: [27, 28]
   k: RIGHT SHIFT
+- p: [11, 23]
+  k: Boot

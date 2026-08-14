@@ -57,6 +57,11 @@
             bindings = <&kp RIGHT_SHIFT>;
             key-positions = <27 28>;
         };
+
+        boot {
+            bindings = <&bootloader>;
+            key-positions = <11 23>;
+        };
     };
 
     macros {
@@ -387,11 +392,12 @@
 
         default_layer {
             // 一番外側の列: 左 = ESC / TAB / Win、右 = Caps Word / ; / '
+
             bindings = <
-&kp ESC       &kp Q             &kp W         &kp E   &kp R               &kp T            &kp Y      &kp U  &kp I      &kp O    &kp P                 &caps_word
-&kp TAB       &mt LCTRL A       &kp S         &kp D   &mt LEFT_CONTROL F  &kp G            &kp H      &kp J  &kp K      &kp L    &lt 1 MINUS           &kp SEMICOLON
-&kp LEFT_GUI  &mt LEFT_SHIFT Z  &kp X         &kp C   &kp V               &kp B            &kp N      &kp M  &kp COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH  &kp SINGLE_QUOTE
-                                              &alt_lt 5 LANG2  &lt 2 SPACE  &mt LEFT_WIN LANG1      &kp BACKSPACE  &lt 3 ENTER  &lt 4 ESC
+&kp ESC           &kp Q             &kp W  &kp E            &kp R               &kp T               &kp Y          &kp U        &kp I      &kp O    &kp P                  &caps_word
+&kp LEFT_CONTROL  &mt LCTRL A       &kp S  &kp D            &mt LEFT_CONTROL F  &kp G               &kp H          &kp J        &kp K      &kp L    &lt 1 MINUS            &kp SEMICOLON
+&kp LEFT_SHIFT    &mt LEFT_SHIFT Z  &kp X  &kp C            &kp V               &kp B               &kp N          &kp M        &kp COMMA  &kp DOT  &mt RIGHT_SHIFT SLASH  &kp SINGLE_QUOTE
+                                           &alt_lt 5 LANG2  &lt 2 SPACE         &mt LEFT_WIN LANG1  &kp BACKSPACE  &lt 3 ENTER  &lt 4 ESC
             >;
         };
 
@@ -400,43 +406,43 @@
 &trans  &kp F1            &kp F2              &kp F3     &kp F4     &kp F5            &kp F6            &kp F7          &kp F8        &kp F9           &none  &trans
 &trans  &kp LEFT_CONTROL  &kp LC(LEFT_SHIFT)  &kp F10    &kp F11    &kp F12           &kp LEFT_ARROW    &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &none  &trans
 &trans  &kp LEFT_SHIFT    &kp LEFT_GUI        &m_c_pgup  &m_c_pgdn  &kp LG(UP_ARROW)  &kp RG(UP_ARROW)  &kp HOME        &kp END       &none            &none  &trans
-                                                         &trans     &trans            &trans            &trans          &trans        &none
+                                              &trans     &trans     &trans            &trans            &trans          &none
             >;
         };
 
         SYMBOL {
             bindings = <
-&trans  &kp ESC         &none    &none    &none    &none      &m_caret          &m_amps    &m_star    &kp EQUAL         &kp BACKSLASH      &trans
-&trans  &m_excl         &m_at    &m_hash  &m_dllr  &m_prcnt   &kp SEMICOLON     &m_lpar    &m_rpar    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans
-&trans  &kp LEFT_SHIFT  &none    &none    &none    &none      &kp SINGLE_QUOTE  &m_lbrace  &m_rbrace  &m_lt             &m_gt              &trans
-                                          &trans   &trans     &trans            &kp DEL    &trans     &none
+&trans  &kp ESC         &none  &none    &none    &none     &m_caret          &m_amps    &m_star    &kp EQUAL         &kp BACKSLASH      &trans
+&trans  &m_excl         &m_at  &m_hash  &m_dllr  &m_prcnt  &kp SEMICOLON     &m_lpar    &m_rpar    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &trans
+&trans  &kp LEFT_SHIFT  &none  &none    &none    &none     &kp SINGLE_QUOTE  &m_lbrace  &m_rbrace  &m_lt             &m_gt              &trans
+                               &trans   &trans   &trans    &kp DEL           &trans     &none
             >;
         };
 
         NUM_FN {
             bindings = <
-&trans  &trans            &trans            &trans            &trans            &trans          &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &kp N1            &kp N2            &kp N3            &kp N4            &kp N5          &kp N6  &kp N7  &kp N8  &kp N9  &kp N0  &trans
-&trans  &kp LC(NUMBER_1)  &kp LC(NUMBER_2)  &kp LC(NUMBER_3)  &kp LC(NUMBER_4)  &kp LS(ESCAPE)  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans            &trans            &trans            &trans            &trans          &trans         &trans  &trans  &trans  &trans  &trans
+&trans  &kp N1            &kp N2            &kp N3            &kp N4            &kp N5          &kp N6         &kp N7  &kp N8  &kp N9  &kp N0  &trans
+&trans  &kp LC(NUMBER_1)  &kp LC(NUMBER_2)  &kp LC(NUMBER_3)  &kp LC(NUMBER_4)  &kp LS(ESCAPE)  &trans         &trans  &trans  &trans  &trans  &trans
                                             &trans            &trans            &trans          &kp BACKSPACE  &trans  &trans
             >;
         };
 
         BLUETOOTH {
             bindings = <
-&trans        &trans  &trans  &trans  &trans  &trans       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans
-&trans        &trans  &trans  &trans  &trans  &trans       &trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &trans
-&bootloader   &trans  &trans  &trans  &trans  &trans       &trans        &trans        &trans        &trans        &bt BT_CLR      &trans
-                                      &trans  &trans  &trans      &trans  &trans  &trans
+&trans       &trans  &trans  &trans  &trans  &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans
+&trans       &trans  &trans  &trans  &trans  &trans  &trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &trans
+&bootloader  &trans  &trans  &trans  &trans  &trans  &trans        &trans        &trans        &trans        &bt BT_CLR      &trans
+                             &trans  &trans  &trans  &trans        &trans        &trans
             >;
         };
 
         ALT_LAYER {
             bindings = <
-&trans  &kp ESC      &trans   &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &kp LS(TAB)  &kp TAB  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans       &trans   &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
-                              &trans  &trans  &trans      &kp SPACE  &trans  &trans
+&trans  &kp ESC      &trans   &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans
+&trans  &kp LS(TAB)  &kp TAB  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans
+&trans  &trans       &trans   &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans
+                              &trans  &trans  &trans  &kp SPACE  &trans  &trans
             >;
         };
     };
